@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/components/unit_container.dart';
-import 'package:portfolio/screens/quiz_scrren/quiz_screen.dart';
+import 'package:portfolio/screens/quiz_screen/starts_screen.dart';
 import 'package:portfolio/theme/app_textdata.dart';
 
 class UnitScreen extends StatefulWidget {
@@ -26,19 +26,25 @@ class _UnitScreenState extends State<UnitScreen> {
             child: Column(
               children: [
                 UnitContainer(
-                  titleIcon: Icon(Icons.calculate,color: Colors.black,), 
-                  title: Text("けいさん"), 
-                  iconButton: IconButton(
-                    onPressed: (){
-                      QuizScreen();
-                    },
-                    icon: Icon(Icons.arrow_right_alt, color: Colors.black,)
+                  titleIcon: Icon(Icons.calculate, color: Colors.black),
+                  title: Text(
+                    "けいさん",
+                    style: AppTextdata.titleFonts.copyWith(
+                      fontSize: 18,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
-                )
+                  iconButton: IconButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => StartsScreen()));
+                    },
+                    icon: Icon(Icons.arrow_right_alt, color: Colors.black),
+                  ),
+                ),
               ],
             ),
-          )
-        )
+          ),
+        ),
       ),
     );
   }
