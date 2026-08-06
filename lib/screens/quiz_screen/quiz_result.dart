@@ -1,15 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:isar/isar.dart';
+part 'quiz_result.g.dart';
 
-class QuizResult extends StatefulWidget {
-  const QuizResult({super.key});
-
-  @override
-  State<QuizResult> createState() => _QuizResultState();
-}
-
-class _QuizResultState extends State<QuizResult> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
+@collection
+class QuizResult {
+  Id id = Isar.autoIncrement;
+  String? title;
+  int score = 0;
+  double correctAnswerRate = 0.0;
+  double totalStudyTime = 0;
 }

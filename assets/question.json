@@ -100,16 +100,16 @@
   {
     "id": 8,
     "category": "因数分解と約分",
-    "question": "(2x + 3y)(3x - 7y)/4x^2 +12x + 9yを計算してください。",
+    "question": "\\frac{(2x + 3y)(3x - 7y)}{4x^2 +12x + 9y}を計算してください。",
     "options": [
-      "(2x + 3y) (3x - 7y)/(2x + 3y)",
+      "\\frac{(2x + 3y) (3x - 7y)}{2x + 3y}",
       "(3x - 7y)",
-      "3x -7y / 2x + 3",
+      "\\frac{3x -7y}{2x + 3}",
       "(2x + 3y)(3x - 7y)"
     ],
     "answerIndex" : 2,
     "level": "applied",
-    "explanation": "1. 分母を因数分解する(example: (x + 5y)(10x - 8y) / x^2 +10x + 25y = (x + 5y)(10x - 8y) / (x + 5y)^2) \n2. 約分できるかたまりを探す(example: 分母と分子にある x + 5y)\n3. 約分して答えを出す（example: (x + 5y)(10x - 8y) / (x + 5y)^2）= 10x - 8y / x + 5y"
+    "explanation": "1. 分母を因数分解する(example: \\frac{(x + 5y)(10x - 8y)}{x^2 +10x + 25y} = \\frac{(x + 5y)(10x - 8y)}{(x + 5y)^2} \n2. 約分できるかたまりを探す(example: 分母と分子にある x + 5y)\n3. 約分して答えを出す（example: \\frac{(x + 5y)(10x - 8y)}{(x + 5y)^2} = \\frac{10x - 8y}{x + 5y}"
   },
   {
     "id": 9,
@@ -130,10 +130,10 @@
     "category": "解の公式",
     "question": "2x^2 + 6x + 3をxについて解いてください。",
     "options": [
-      "x = -36 ± 2√3/ 4",
-      "x = -18 ± √3 / 2",
-      "x = 36 + 2√3 / 4",
-      "x = 18 - √3 / 2"
+      "x = \\frac{-36 ± 2√3}{4}",
+      "x = \\frac{-18 ± √3}{2}",
+      "x = \\frac{36 + 2√3}{4}",
+      "x = \\frac{18 - √3}{2}"
     ],
     "answerIndex" : 1,
     "level": "applied",

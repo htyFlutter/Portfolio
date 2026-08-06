@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/components/home_widgets.dart';
+import 'package:portfolio/screens/quiz_screen/quiz_result.dart';
 import 'package:portfolio/screens/timer_screen.dart';
+import 'package:portfolio/services/isar_service.dart';
 import 'package:portfolio/theme/app_textdata.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,6 +15,24 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    FutureBuilder<List<QuizResult>>(
+      future: IsarService.instance.getAllQuestionResults(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Text("データがありません");
+        }
+        final totalResult = snapshot.data!;
+        double totalTime = 0.0;
+
+        for (var item in totalResult) {
+          totalTime += item.totalStudyTime;
+        }
+      },
+    );
+    
     return Scaffold(
       appBar: AppBar(
         leading: Icon(Icons.home),
@@ -26,7 +46,16 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Row(
                 children: [
-                  HomeWidgets(title: "学習時間", icon: Icons.lock_clock),
+                  Column(
+                    children: [
+                      HomeWidgets(
+                        title: "学習時間", icon: Icons.lock_clock,
+                      ),
+                      const SizedBox(height: 30),
+                      Text("${totalTime}") //ここに設置したいけどエラー出る
+                    ],
+                  ),
+                  
                   const SizedBox(width: 45),
                   HomeWidgets(title: "正答率", icon: Icons.check),
                 ],

@@ -24,7 +24,7 @@ class OptionCard extends StatelessWidget {
             child: Math.tex(
               optionText,
               textStyle: TextStyle(fontSize: 20,
-              color: Theme.of(context).colorScheme.onSecondary),
+              color: Theme.of(context).colorScheme.secondary),
             )
           ),
           onTap: () => onTap()

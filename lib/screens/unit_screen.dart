@@ -16,7 +16,7 @@ class _UnitScreenState extends State<UnitScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: Icon(Icons.alarm),
-        title: Text("たんげん一覧", style: AppTextdata.titleFonts),
+        title: Text("メニュー一覧", style: AppTextdata.titleFonts),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -25,6 +25,7 @@ class _UnitScreenState extends State<UnitScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
               children: [
+                const SizedBox(height: 50),
                 UnitContainer(
                   titleIcon: Icon(Icons.calculate, color: Colors.black),
                   title: Text(

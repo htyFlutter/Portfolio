@@ -3,6 +3,8 @@ import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:portfolio/components/option_card.dart';
 import 'package:portfolio/models/question.dart';
 import 'package:portfolio/screens/quiz_screen/quiz_result.dart';
+import 'package:portfolio/screens/quiz_screen/quiz_result_screen.dart';
+import 'package:portfolio/services/isar_service.dart';
 import 'package:portfolio/services/quiz_service.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -24,7 +26,10 @@ class _QuizScreenState extends State<QuizScreen> {
         currentIndex++;
       });
     } else {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => QuizResult()));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => QuizResultScreen()),
+      );
     }
   }
 
@@ -32,6 +37,15 @@ class _QuizScreenState extends State<QuizScreen> {
   void initState() {
     super.initState();
     _questionFuture = QuizService().loadJsonData();
+  }
+
+  void onQuizFinished() async {
+    final result = QuizResult();
+    await IsarService.instance.saveQuestionsResults(result);
+
+    if (!mounted) return;
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) => QuizResultScreen()));
   }
 
   @override
@@ -51,17 +65,27 @@ class _QuizScreenState extends State<QuizScreen> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
-                        children: [
-                          Math.tex(
-                            snapshot.data![currentIndex].question,
-                            textStyle: TextStyle(fontSize: 20),
-                          ),
-                          const SizedBox(height: 150),
-                          ...List.generate(snapshot.data![currentIndex].options.length, ((index) => OptionCard(onTap: ()=> checkAnswer(index, snapshot.data![currentIndex].answerIndex, snapshot.data!.length), optionText: snapshot.data![currentIndex].options[index])),
+                      children: [
+                        Math.tex(
+                          snapshot.data![currentIndex].question,
+                          textStyle: TextStyle(fontSize: 20),
                         ),
-                      ]
-                    )
-                  )
+                        const SizedBox(height: 150),
+                        ...List.generate(
+                          snapshot.data![currentIndex].options.length,
+                          ((index) => OptionCard(
+                            onTap: () => checkAnswer(
+                              index,
+                              snapshot.data![currentIndex].answerIndex,
+                              snapshot.data!.length,
+                            ),
+                            optionText:
+                                snapshot.data![currentIndex].options[index],
+                          )),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               }
               return const Center(child: CircularProgressIndicator());
