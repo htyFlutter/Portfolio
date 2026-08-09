@@ -20,16 +20,17 @@ class _QuizScreenState extends State<QuizScreen> {
   int score = 0;
 
   void checkAnswer(int selectIndex, int answerIndex, int totalQuestions) {
-    if (currentIndex < totalQuestions - 1) {
-      setState(() {
+    setState(() {
+      if (selectIndex == answerIndex) {
         score++;
+      }
+    });
+    if (totalQuestions - (currentIndex + 1) > 0) {
+      setState(() {
         currentIndex++;
       });
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => QuizResultScreen()),
-      );
+      onQuizFinished(totalQuestions);
     }
   }
 
@@ -39,13 +40,20 @@ class _QuizScreenState extends State<QuizScreen> {
     _questionFuture = QuizService().loadJsonData();
   }
 
-  void onQuizFinished() async {
+  void onQuizFinished(int totalQuestions) async {
     final result = QuizResult();
+    result.score = score;
+    result.correctAnswerRate = (score / totalQuestions) * 100;
     await IsarService.instance.saveQuestionsResults(result);
 
     if (!mounted) return;
 
-    Navigator.push(context, MaterialPageRoute(builder: (context) => QuizResultScreen()));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => QuizResultScreen(
+        totalQuestions: totalQuestions, score: score,
+      )),
+    );
   }
 
   @override

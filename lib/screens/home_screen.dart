@@ -29,12 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
         for (var item in totalResult) {
           totalTime += item.totalStudyTime;
-          totalRate += item.score;
+          totalRate += item.correctAnswerRate;
         }
 
-        averageRate = totalRate / totalResult.length;
         if (totalResult.isEmpty) {
-          Text("エラー発生！0で割ることはできません。");
+          averageRate = 0;
         } else {
           averageRate = totalRate / totalResult.length;
         }

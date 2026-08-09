@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/theme/app_textdata.dart';
+import 'package:portfolio/components/chat_widgets.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -16,9 +17,7 @@ class _ChatScreenState extends State<ChatScreen> {
         leading: Icon(Icons.chat),
         title: Text("AIとチャットができます", style: AppTextdata.titleFonts,),
       ),
-      body: Center(
-        child: Text("Chat"),
-      ),
+      body: ChatWidgets()
     );
   }
 }

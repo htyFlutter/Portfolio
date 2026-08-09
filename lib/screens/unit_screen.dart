@@ -44,7 +44,7 @@ class _UnitScreenState extends State<UnitScreen> {
                 ),
                 const SizedBox(height: 20),
                 UnitContainer(
-                  titleIcon: Icon(Icons.coffee, color: Colors.black), 
+                  titleIcon: Icon(Icons.show_chart, color: Colors.black), 
                   title: Text(
                     "かんすう",
                     style: AppTextdata.titleFonts.copyWith(

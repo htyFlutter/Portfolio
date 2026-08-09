@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:portfolio/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/chat_screen.dart';
 import 'package:portfolio/screens/home_screen.dart';
@@ -6,10 +8,15 @@ import 'package:portfolio/screens/unit_screen.dart';
 import 'package:portfolio/services/isar_service.dart';
 import 'package:portfolio/theme/app_themedata.dart';
 
+
 void main() async {
+  //Isar側
   WidgetsFlutterBinding.ensureInitialized();
 
   await IsarService.instance.init();
+  await Firebase.initializeApp(
+    options:DefaultFirebaseOptions.currentPlatform
+  );
 
   runApp(const MyApp());
 }

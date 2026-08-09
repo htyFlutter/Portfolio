@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/theme/app_textdata.dart';
 
 class QuizResultScreen extends StatefulWidget {
-  const QuizResultScreen({super.key});
+  const QuizResultScreen({
+    super.key,
+    required this.score,
+    required this.totalQuestions,
+  });
+
+  final int score;
+  final int totalQuestions;
 
   @override
   State<QuizResultScreen> createState() => _QuizResultScreenState();
@@ -48,21 +55,14 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
                     ),
                     const SizedBox(height: 30),
                     Text(
-                      "正解数: 問",
+                      "正解数: ${widget.score}問",
                       style: AppTextdata.quizFonts.copyWith(
                         color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      "不正解数: 問",
-                      style: AppTextdata.quizFonts.copyWith(
-                        color: Theme.of(context).colorScheme.onSecondary,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "正答率: %",
+                      "正答率: ${(widget.score / widget.totalQuestions * 100).toStringAsFixed(1)}%",
                       style: AppTextdata.quizFonts.copyWith(
                         color: Theme.of(context).colorScheme.onSecondary,
                       ),
