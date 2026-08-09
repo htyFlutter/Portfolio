@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/screens/timer.dart';
 import 'package:portfolio/theme/app_textdata.dart';
 
 class TimerScreen extends StatefulWidget {
@@ -14,14 +15,19 @@ class _TimerScreenState extends State<TimerScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("15分タイマー", style: AppTextdata.titleFonts),
-      centerTitle: true,
+        centerTitle: true,
       ),
       body: Center(
         child: TextButton(
-          onPressed: (){}, 
-          child: Text("15分タイマースタート!", style: AppTextdata.titleFonts)
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Timer()),
+            );
+          },
+          child: Text("15分タイマースタート!", style: AppTextdata.titleFonts),
         ),
-      )
+      ),
     );
   }
 }

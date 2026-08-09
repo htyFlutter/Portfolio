@@ -15,79 +15,97 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    FutureBuilder<List<QuizResult>>(
+    return FutureBuilder<List<QuizResult>>(
       future: IsarService.instance.getAllQuestionResults(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator();
         }
-        if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Text("データがありません");
-        }
-        final totalResult = snapshot.data!;
+
+        final totalResult = snapshot.data ?? [];
         double totalTime = 0.0;
+        double totalRate = 0.0;
+        double averageRate = 0.0;
 
         for (var item in totalResult) {
           totalTime += item.totalStudyTime;
+          totalRate += item.score;
         }
-      },
-    );
-    
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.home),
-        title: Text("ホーム", style: AppTextdata.titleFonts),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(30),
-          child: Column(
-            children: [
-              Row(
+
+        averageRate = totalRate / totalResult.length;
+        if (totalResult.isEmpty) {
+          Text("エラー発生！0で割ることはできません。");
+        } else {
+          averageRate = totalRate / totalResult.length;
+        }
+        return Scaffold(
+          appBar: AppBar(
+            leading: Icon(Icons.home),
+            title: Text("ホーム", style: AppTextdata.titleFonts),
+            centerTitle: true,
+          ),
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.all(30),
+              child: Column(
                 children: [
-                  Column(
+                  Row(
                     children: [
-                      HomeWidgets(
-                        title: "学習時間", icon: Icons.lock_clock,
+                      Column(
+                        children: [
+                          HomeWidgets(
+                            title: "学習時間",
+                            icon: Icons.lock_clock,
+                            value: "$totalTime時間",
+                          ),
+                          //ここに設置したいけどエラー出る
+                        ],
                       ),
-                      const SizedBox(height: 30),
-                      Text("${totalTime}") //ここに設置したいけどエラー出る
+
+                      const SizedBox(width: 45),
+                      Column(
+                        children: [
+                          HomeWidgets(
+                            title: "正答率",
+                            icon: Icons.check,
+                            value: "${averageRate.toStringAsFixed(1)}%",
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                  
-                  const SizedBox(width: 45),
-                  HomeWidgets(title: "正答率", icon: Icons.check),
-                ],
-              ),
-              const SizedBox(height: 200),
-              Container(
-                height: 60,
-                width: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => TimerScreen()),
-                    );
-                  },
-                  child: Text(
-                    "15分タイマー",
-                    style: AppTextdata.titleFonts.copyWith(
-                      fontSize: 18,
-                      color: Theme.of(context).colorScheme.onTertiary,
+                  const SizedBox(height: 200),
+                  Container(
+                    height: 60,
+                    width: 170,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TimerScreen(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "15分タイマー",
+                        style: AppTextdata.titleFonts.copyWith(
+                          fontSize: 18,
+                          color: Theme.of(context).colorScheme.onTertiary,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

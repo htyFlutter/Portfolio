@@ -6,11 +6,12 @@ class HomeWidgets extends StatefulWidget {
     super.key,
     required this.title,
     required this.icon,
-    
+    required this.value,
   });
 
   final String title;
   final IconData icon;
+  final String value;
 
   @override
   State<HomeWidgets> createState() => _HomeWidgetsState();
@@ -28,18 +29,26 @@ class _HomeWidgetsState extends State<HomeWidgets> {
       ),
       child: Padding(
         padding: EdgeInsets.only(top: 10, left: 15, right: 15),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
           children: [
-            Icon(widget.icon, color: Colors.black),
-            const SizedBox(width: 10),
-            Text(
-              widget.title,
-              style: AppTextdata.titleFonts.copyWith(
-                fontSize: 18,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(widget.icon, color: Colors.black),
+                const SizedBox(width: 10),
+                Text(
+                  widget.title,
+                  style: AppTextdata.titleFonts.copyWith(
+                    fontSize: 18,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+                
+              ],
             ),
+            const SizedBox(height: 30),
+                Text(widget.value, style: AppTextdata.titleFonts.copyWith(
+                  color: Theme.of(context).colorScheme.secondary)),
           ],
         ),
       ),
