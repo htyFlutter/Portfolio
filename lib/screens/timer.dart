@@ -16,20 +16,29 @@ class _TimerState extends State<Timer> {
   @override
   void initState() {
     super.initState();
-    _timer = async.Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        _count--;
-        if (_count == 0) {
-          timer.cancel();
-        }
-      });
-    });
+    _startTimer();
   }
 
   @override
   void dispose() {
     _timer?.cancel();
     super.dispose();
+  }
+
+  void _startTimer() {
+    _timer?.cancel();
+    if (_count <= 0) {
+      _count = 15 * 60;
+    }
+
+    _timer = async.Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        _count--;
+        if (_count <= 0) {
+          timer.cancel();
+        }
+      });
+    });
   }
 
   String _getTimer() {
@@ -56,7 +65,7 @@ class _TimerState extends State<Timer> {
                     height: 110,
                     width: 110,
                     child: CircularProgressIndicator(
-                      value: _count / 15 * 60,
+                      value: _count / (15 * 60),
                       color: Theme.of(context).colorScheme.tertiary,
                     ),
                   ),
@@ -94,17 +103,7 @@ class _TimerState extends State<Timer> {
                   radius: 25,
                   child: IconButton(
                     onPressed: () {
-                      _timer = async.Timer.periodic(
-                        const Duration(seconds: 1),
-                        (timer) {
-                          setState(() {
-                            _count--;
-                            if (_count == 0) {
-                              timer.cancel();
-                            }
-                          });
-                        },
-                      );
+                      _startTimer();
                     },
                     icon: Icon(
                       Icons.play_arrow,
@@ -120,7 +119,9 @@ class _TimerState extends State<Timer> {
                   child: IconButton(
                     onPressed: () {
                       _timer?.cancel();
-                      _count = 15 * 60;
+                      setState(() {
+                        _count = 15 * 60;
+                      });
                     },
                     icon: Icon(
                       Icons.refresh,
