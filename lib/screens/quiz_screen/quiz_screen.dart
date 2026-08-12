@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
+import 'package:portfolio/components/explanation_widget.dart';
 import 'package:portfolio/components/option_card.dart';
 import 'package:portfolio/models/question.dart';
 import 'package:portfolio/screens/quiz_screen/quiz_result.dart';
@@ -50,9 +51,10 @@ class _QuizScreenState extends State<QuizScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => QuizResultScreen(
-        totalQuestions: totalQuestions, score: score,
-      )),
+      MaterialPageRoute(
+        builder: (context) =>
+            QuizResultScreen(totalQuestions: totalQuestions, score: score),
+      ),
     );
   }
 
@@ -60,44 +62,48 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: FutureBuilder<List<Question>>(
-        future: _questionFuture,
-        builder:
-            (BuildContext context, AsyncSnapshot<List<Question>> snapshot) {
-              if (snapshot.hasError) {
-                return Center(child: Text("エラー発生！ 原因: ${snapshot.error}"));
-              }
+      body: SingleChildScrollView(
+        child: FutureBuilder<List<Question>>(
+          future: _questionFuture,
+          builder:
+              (BuildContext context, AsyncSnapshot<List<Question>> snapshot) {
+                if (snapshot.hasError) {
+                  return Center(child: Text("エラー発生！ 原因: ${snapshot.error}"));
+                }
 
-              if (snapshot.hasData) {
-                return SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      children: [
-                        Math.tex(
-                          snapshot.data![currentIndex].question,
-                          textStyle: TextStyle(fontSize: 20),
-                        ),
-                        const SizedBox(height: 150),
-                        ...List.generate(
-                          snapshot.data![currentIndex].options.length,
-                          ((index) => OptionCard(
-                            onTap: () => checkAnswer(
-                              index,
-                              snapshot.data![currentIndex].answerIndex,
-                              snapshot.data!.length,
-                            ),
-                            optionText:
-                                snapshot.data![currentIndex].options[index],
-                          )),
-                        ),
-                      ],
+                if (snapshot.hasData) {
+                  return SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: [
+                          Math.tex(
+                            snapshot.data![currentIndex].question,
+                            textStyle: TextStyle(fontSize: 20),
+                          ),
+                          const SizedBox(height: 185),
+                          ...List.generate(
+                            snapshot.data![currentIndex].options.length,
+                            ((index) => OptionCard(
+                              onTap: () => checkAnswer(
+                                index,
+                                snapshot.data![currentIndex].answerIndex,
+                                snapshot.data!.length,
+                              ),
+                              optionText:
+                                  snapshot.data![currentIndex].options[index],
+                            )),
+                          ),
+                          const SizedBox(height: 10),
+                          ExplanationWidget(explanationText: snapshot.data![currentIndex].explanation),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }
-              return const Center(child: CircularProgressIndicator());
-            },
+                  );
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
+        ),
       ),
     );
   }

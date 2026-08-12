@@ -22,6 +22,7 @@ class _StartsScreenState extends State<StartsScreen> {
               "クイズを始めます。\n 4択式になっていますので、どれか1つを押してください。",
               textAlign: TextAlign.center,
             ),
+            const SizedBox(height: 200),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
