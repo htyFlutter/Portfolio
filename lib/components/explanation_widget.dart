@@ -14,6 +14,8 @@ class _ExplanationWidgetState extends State<ExplanationWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 300,
+      width: 360,
       padding: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainerHighest,

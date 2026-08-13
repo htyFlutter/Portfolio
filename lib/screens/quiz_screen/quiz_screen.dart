@@ -7,6 +7,7 @@ import 'package:portfolio/screens/quiz_screen/quiz_result.dart';
 import 'package:portfolio/screens/quiz_screen/quiz_result_screen.dart';
 import 'package:portfolio/services/isar_service.dart';
 import 'package:portfolio/services/quiz_service.dart';
+import 'package:portfolio/theme/app_textdata.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -19,16 +20,26 @@ class _QuizScreenState extends State<QuizScreen> {
   late final Future<List<Question>> _questionFuture;
   int currentIndex = 0;
   int score = 0;
+  bool isAnswered = false;
+  int? selectedIndex;
 
   void checkAnswer(int selectIndex, int answerIndex, int totalQuestions) {
+    if (isAnswered) return;
     setState(() {
+      isAnswered = true;
+      selectedIndex = selectIndex;
       if (selectIndex == answerIndex) {
         score++;
       }
     });
+  }
+
+  void goNext(int totalQuestions) {
     if (totalQuestions - (currentIndex + 1) > 0) {
       setState(() {
+        isAnswered = true;
         currentIndex++;
+        selectedIndex = null;
       });
     } else {
       onQuizFinished(totalQuestions);
@@ -58,6 +69,17 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
+  Color? borderColorFor(int index, int answerIndex) {
+    if (!isAnswered) return null;
+    if (index == answerIndex) {
+      return Theme.of(context).colorScheme.tertiary;
+    }
+    if (index == selectedIndex) {
+      return Theme.of(context).colorScheme.error;
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +103,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             snapshot.data![currentIndex].question,
                             textStyle: TextStyle(fontSize: 20),
                           ),
-                          const SizedBox(height: 185),
+                          const SizedBox(height: 100),
                           ...List.generate(
                             snapshot.data![currentIndex].options.length,
                             ((index) => OptionCard(
@@ -92,10 +114,22 @@ class _QuizScreenState extends State<QuizScreen> {
                               ),
                               optionText:
                                   snapshot.data![currentIndex].options[index],
+                              borderColor: borderColorFor(
+                                index,
+                                snapshot.data![currentIndex].answerIndex,
+                              ),
                             )),
                           ),
                           const SizedBox(height: 10),
-                          ExplanationWidget(explanationText: snapshot.data![currentIndex].explanation),
+                          ExplanationWidget(
+                            explanationText:
+                                snapshot.data![currentIndex].explanation,
+                          ),
+                          const SizedBox(height: 30),
+                          ElevatedButton(
+                            onPressed: () => goNext(snapshot.data!.length),
+                            child: Text("つぎへ", style: AppTextdata.quizFonts),
+                          ),
                         ],
                       ),
                     ),

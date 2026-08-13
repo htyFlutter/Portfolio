@@ -23,7 +23,6 @@ class _ChatWidgetsState extends State<ChatWidgets> {
   @override
   Widget build(BuildContext context) {
     return Chat(
-      backgroundColor: Theme.of(context).colorScheme.surface,
       chatController: _chatController,
       currentUserId: 'User',
       onMessageSend: (text) async {
