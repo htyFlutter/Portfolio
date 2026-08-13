@@ -14,29 +14,29 @@ class _ExplanationWidgetState extends State<ExplanationWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
-      width: 360,
+      padding: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: Theme.of(context).colorScheme.tertiary),
+        border: Border.all(color: Theme.of(context).colorScheme.secondary),
       ),
       child: Column(
         children: [
           SizedBox(height: 15),
           Text(
-            "かいせつ",
+            "HINT",
             style: AppTextdata.quizFonts.copyWith(
-              color: Theme.of(context).colorScheme.secondary,
+              fontSize: 25,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.all(10),
             child: Text(
               widget.explanationText,
               style: AppTextdata.quizFonts.copyWith(
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontSize: 20
               ),
             ),

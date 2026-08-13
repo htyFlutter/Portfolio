@@ -23,7 +23,7 @@ class _ChatWidgetsState extends State<ChatWidgets> {
   @override
   Widget build(BuildContext context) {
     return Chat(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       chatController: _chatController,
       currentUserId: 'User',
       onMessageSend: (text) async {
@@ -36,7 +36,6 @@ class _ChatWidgetsState extends State<ChatWidgets> {
         await FirebaseFirestore.instance
             .collection('messages')
             .add(messageContent);
-        print("無事送信されました！ text: $text");
       },
       resolveUser: (UserID id) async {
         return User(id: id, name: 'User');

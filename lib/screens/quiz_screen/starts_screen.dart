@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/quiz_screen/quiz_screen.dart';
+import 'package:portfolio/theme/app_textdata.dart';
 
 class StartsScreen extends StatefulWidget {
   const StartsScreen({super.key});
@@ -24,13 +25,18 @@ class _StartsScreenState extends State<StartsScreen> {
             ),
             const SizedBox(height: 200),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                side: BorderSide(
+                  color: Theme.of(context).colorScheme.secondary
+                )
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => QuizScreen()),
                 );
               },
-              child: Text("ココをタップ"),
+              child: Text("ココをタップ", style: AppTextdata.titleFonts,),
             ),
           ],
         ),

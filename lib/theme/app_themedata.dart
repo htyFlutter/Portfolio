@@ -16,6 +16,8 @@ class AppThemedata {
       onError: Colors.white,
       surface: Color(0xFFF3ECD8),
       onSurface: Color(0xFF6f4b3e),
+      surfaceContainerHighest: Color(0xFFDCD6C8),  
+      onSurfaceVariant:Color(0xFF5C5048), 
     ),
   );
 
@@ -33,6 +35,8 @@ class AppThemedata {
       onError: Colors.white, 
       surface: Color(0xFF261C19), 
       onSurface: Color(0xFFF3ECD8),
+      surfaceContainerHighest: Color(0xFF352B26),   
+      onSurfaceVariant: Color(0xFFCFC4B6),   
     ),
   );
 }
