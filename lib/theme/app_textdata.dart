@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTextdata {
@@ -22,7 +22,7 @@ class AppTextdata {
     fontSize: 16,
     height: 18.0 / 16.0,
   );
-
+ // たんげん画面で使うフォント
   static TextStyle get unitFonts => GoogleFonts.mPlusRounded1c().copyWith(
     letterSpacing: 1.1, fontSize: 16, height: 18.0 / 16.0,
   );

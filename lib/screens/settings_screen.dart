@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/theme/app_textdata.dart';
 
@@ -24,7 +24,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Padding(
               padding: EdgeInsets.all(30),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 height: 90,
                 width: 350,
                 decoration: BoxDecoration(
@@ -40,7 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Icons.dark_mode,
                       color: Theme.of(context).colorScheme.onPrimary
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 4),
                     Text(
                       "ダークモードができます",
                       style: AppTextdata.titleFonts.copyWith(
@@ -48,7 +48,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         color: Theme.of(context).colorScheme.secondary
                       )
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 4),
                     Switch(
                       value: Theme.of(context).brightness == Brightness.dark,
                       onChanged: (bool isDarkMode) {

@@ -9,7 +9,8 @@
       "Bash(./gradlew clean *)",
       "Bash(flutter build *)",
       "Bash(find ~/.pub-cache -maxdepth 1 -iname \"isar_flutter_libs-*\" -o -iname \"shared_preferences_android-*\" 2>/dev/null | head; PUB=$\\(find ~/.pub-cache/hosted/pub.dev -maxdepth 1 -iname \"isar_flutter_libs-*\" 2>/dev/null | head -1\\); echo \"isar: $PUB\"; grep -n \"compileSdk\\\\|namespace\" \"$PUB/android/build.gradle\" 2>/dev/null; SP=$\\(find ~/.pub-cache/hosted/pub.dev -maxdepth 1 -iname \"shared_preferences_android-*\" 2>/dev/null | head -1\\); echo \"sp: $SP\"; grep -n \"compileSdk\\\\|namespace\" \"$SP/android/build.gradle\" 2>/dev/null)",
-      "Bash(./gradlew --stop)"
+      "Bash(./gradlew --stop)",
+      "Bash(flutter analyze *)"
     ]
   }
 }

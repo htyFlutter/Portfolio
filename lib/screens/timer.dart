@@ -1,5 +1,5 @@
 import 'dart:async' as async;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:portfolio/theme/app_textdata.dart';
 
 class Timer extends StatefulWidget {

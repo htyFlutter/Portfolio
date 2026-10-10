@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:portfolio/components/home_widgets.dart';
 import 'package:portfolio/screens/quiz_screen/quiz_result.dart';
 import 'package:portfolio/screens/timer_screen.dart';
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
 
-                      const SizedBox(width: 45),
+                      const SizedBox(width: 40),
                       Column(
                         children: [
                           HomeWidgets(

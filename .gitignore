@@ -43,3 +43,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+PROGRESS_2026-08-09.md
+.claude/
+CLAUDE.md
