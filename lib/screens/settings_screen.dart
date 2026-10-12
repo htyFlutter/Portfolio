@@ -26,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 height: 90,
-                width: 350,
+                width: 360,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: Theme.of(context).colorScheme.primary,
