@@ -26,7 +26,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 height: 90,
-                width: 360,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: Theme.of(context).colorScheme.primary,
@@ -41,12 +40,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: Theme.of(context).colorScheme.onPrimary
                     ),
                     const SizedBox(width: 4),
-                    Text(
-                      "ダークモードができます",
-                      style: AppTextdata.titleFonts.copyWith(
-                        fontSize: 18,
-                        color: Theme.of(context).colorScheme.secondary
-                      )
+                    Expanded(
+                      child: Text(
+                        "ダークモードができます",
+                        style: AppTextdata.titleFonts.copyWith(
+                          fontSize: 18,
+                          color: Theme.of(context).colorScheme.secondary
+                        )
+                      ),
                     ),
                     const SizedBox(width: 4),
                     Switch(
