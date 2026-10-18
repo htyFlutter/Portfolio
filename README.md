@@ -29,7 +29,7 @@ ___
 | google_fonts | フォント変更 | 一般的なカフェで使われていそうなオシャレなフォントを使用。 |
 | flutter_launcher_icons | ホームアイコン | AIで生成したカフェ風のアイコンをホームアイコンに設定。 |
 | flutter_math_fork | 数学記号 | 数学記号(²や√など)をより見やすくしやすいするため。 |
-| share_preferenced | ダークモード切り替え | テーマ設定などの軽量なデータ保存に向いているため。 |
+| shared_preferences | ダークモード切り替え | テーマ設定などの軽量なデータ保存に向いているため。 |
 | flutter_chat_ui | AIとのチャット(メッセージ方式)機能のUI | 1からチャット画面を作ると膨大な時間がかかるため、既存のチャットパッケージを使い、チャット画面を作った。 |
 | JSON | 問題テンプレ | 問題のテンプレを最初から用意することで、他の問題を0から作るのを防ぐため使用した。 |
 | cloud_firebase | Gemini APIとのチャット履歴保存 | 従姉妹がどんな問題で躓いてAIに相談したのか、開発側で把握/分析し、今後の項目追加や学習体験の改善に活かすため。 |
@@ -58,23 +58,87 @@ ___
 ```
 
 ## フォルダ/ファイル構成
+```text
+.
+└── lib /
+    ├── components/ - ウィジェット内の部品
+    │   ├── chat_widgets.dart - Chat_UIパッケージを入れる場所。
+    │   ├── explanation_widget.dart - 問題文の下の解説(ヒント)のウィジェットを保存する場所。
+    │   ├── home_widget.dart - ホーム画面で学習時間・正答率を表示させるウィジェットの保管先
+    │   ├── option_card.dart - 4択の選択肢ウィジェットの保管先。
+    │   ├── settings_container.dart - 設定画面に入れる箱の保存場所。(今回はモードを変えるウィジェットだけだが、今後増やすかもしれないので、複製しやすいように分けた。)
+    │   └── unit_container.dart - Unit画面のウィジェット。
+    ├── enum/ 
+    │   └── difficulty.dart - JSONに入れる難易度を列挙
+    ├── models/
+    │   ├── question.dart - 問題を用意するための変数を保存する場所
+    │   └── quiz_record.dart - クイズの結果を計算し、Home画面に表示させる
+    ├── screens/ - 各画面を管理するフォルダ
+    │   ├── quiz_screen/
+    │   │   ├── quiz_result.dart - 問題を解いた結果/正答率を表示し、home画面の上部にあるコンテナの中にそれを表示する。
+    │   │   ├── quiz_result.g.dart - Isarを使うためにコマンドを打って自動生成されたDartファイル
+    │   │   ├── quiz_result_screen.dart - 問題を解いた後の結果表示
+    │   │   └── starts_screen.dart - スタート画面。ボタンを押すと、問題を解けるようになる。
+    │   ├── chat_screen.dart - チャット画面 
+    │   ├── home_screen.dart - ホーム画面
+    │   ├── settings_screen.dart - 設定画面
+    │   ├── timer.dart - タイマー開始から終了まで
+    │   ├── timer_screen.dart - 15分のタイマー画面
+    │   └── unit_screen.dart - 単元画面
+    ├── services/
+    │   ├── gemini_service.dart - Gemini APIを保存する場所
+    │   ├── isar_service.dart - 学習時間・問題の正答率を保存する場所。
+    │   └── quiz_service.dart - Isarデータベースのデータ定義ファイル。
+    ├── theme/ - テーマ(モード変更/カラー・フォント)を保存するフォルダ
+    │   ├── app_themedata.dart - ダークモード/ライトモードの色を保存
+    │   └── app_textdata.dart - 画面で使うフォント(Google Fonts Package)を保存
+    ├── firebase_options.dart - FlutterFire CLIの flutterfire configure コマンドを実行し、lib/firebase_options.dart として自動作成されたファイル。
+    └── main.dart - 実行部分
+
+```
+
+## アプリのスクショ
+![LightMode ホーム画面](images/lighemode/Screenshot iPhone 17 2026-10-13 at 14.02.16.png)<br>
+![DarkMode ホーム画面]()
+
+![LightMode 単元画面]()
+![DarkMode 単元画面]()
+
+![LightMode  チャット画面]()
+![DarkMode  チャット画面]()
+
+![LightMode 設定画面]()
+![DarkMode 設定画面]()
 
 
 
 ## インストール手順
-```
+
+### バージョン説明
+あらかじめ以下のバージョンをインストールしてください。
+
+- **Flutter SDK** : v3.47.7以上
+- **Dart**: v3.13.5以上(Flutterをインストールすると自動でインストールされます)
+- **IDE**: VSCode, Google Antigravity(推奨), Android Studio
+    - Flutter/Dart拡張機能をインストールしてください。
+    - 最新バージョンを使っております。
+    * 2026.10.18現在
+```bash
+#①git cloneします。
+git clone https://github.com/htyFlutter/Portfolio.git
+
 ```
 
 
 ## 使用したAI
 * Claude Code
 * GoogleのAIモード(AIによる概要)
-* Google Antiravity
+* Google Antigravity
 * Gemini
 * Gemini NotebookLM
 
 ### 使用目的
-Gemini NotebookLMにアプリの参考になりそうなウィジェット、Dart構文ののソースを入れ、わからないところがあったらNoteboolLMと連携したGemimi/GoogleのAIに聞きました。
+Gemini NotebookLMにアプリの参考になりそうなウィジェット、Dart構文ののソースを入れ、わからないところがあったらNoteboolLMと連携したGemimi/GoogleのAIなどに聞きました。
 
 
 ## NotebookLMに入れたソース（一部）
@@ -87,3 +151,4 @@ Gemini NotebookLMにアプリの参考になりそうなウィジェット、Dar
  - 彼女にヒアリングしてみて、もし反応がかったら他の単元を増やす。
  - 周りの友人などにもテストしてもらい、こちらでも反応が良かったらiOS対応を目指したい。 
  - 適当の値でUIの大きさ/余白を決めてしまったので、別のアプリを作るときや新しい画面を作るときは、「8の倍数ルール」を採用し、UIを作っていきたい。
+ - 設定画面がまだ「ライトモード/ダークモード切り替え」しかないので、通知機能などの機能を増やしていきたい。
