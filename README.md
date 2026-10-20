@@ -98,17 +98,17 @@ ___
 ```
 
 ## アプリのスクショ
-![LightMode ホーム画面](images/lighemode/Screenshot iPhone 17 2026-10-13 at 14.02.16.png)<br>
-![DarkMode ホーム画面]()
+![LightMode ホーム画面](images/lighemode/LightMode_Home_screen.png)<br>
+![DarkMode ホーム画面](images/darkmode/DarkMode_Home_screen.png)
 
-![LightMode 単元画面]()
-![DarkMode 単元画面]()
+![LightMode 単元画面](images/lighemode/LigheMode_Unit_screen.png)
+![DarkMode 単元画面](images/darkmode/DarkMode_Unit_screen.png)
 
-![LightMode  チャット画面]()
-![DarkMode  チャット画面]()
+![LightMode  チャット画面](images/lighemode/LightMode_Chat_screen.png)
+![DarkMode  チャット画面](images/darkmode/DarkMode_Chat_screen.png)
 
-![LightMode 設定画面]()
-![DarkMode 設定画面]()
+![LightMode 設定画面](images/lighemode/LightMode_Settings_screen.png)
+![DarkMode 設定画面](images/darkmode/DarkMode_Settings_screen.png)
 
 
 
@@ -126,6 +126,21 @@ ___
 ```bash
 #①git cloneします。
 git clone https://github.com/htyFlutter/Portfolio.git
+
+#②Portfolioフォルダに移動します。
+cd Portfolio
+
+#③パッケージをインストールします。
+flutter pub get
+
+#④build_runnerコマンドを実行し、コードを自動生成します。
+dart run build_runner build
+
+#⑤テストします。
+flutter test
+
+#Gemini APIキーを取得し、アプリを起動します(チャット機能を使う場合のみ以下のコマンドを実行してください。)
+flutter run --dart-define=GEMINI_API_KEY=Your_Key
 
 ```
 
@@ -148,7 +163,7 @@ Gemini NotebookLMにアプリの参考になりそうなウィジェット、Dar
 - [Isar Tutorials](https://isar.dev/ja/tutorials/quickstart.html)
 
 ## 反省点/今後の予定
- - 彼女にヒアリングしてみて、もし反応がかったら他の単元を増やす。
+ - 彼女にヒアリングしてみて、もし反応がかったら他の単元を増やしたい。
  - 周りの友人などにもテストしてもらい、こちらでも反応が良かったらiOS対応を目指したい。 
  - 適当の値でUIの大きさ/余白を決めてしまったので、別のアプリを作るときや新しい画面を作るときは、「8の倍数ルール」を採用し、UIを作っていきたい。
  - 設定画面がまだ「ライトモード/ダークモード切り替え」しかないので、通知機能などの機能を増やしていきたい。
